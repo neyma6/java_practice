@@ -35,5 +35,10 @@ public class HouseNumberRange implements Comparable<HouseNumberRange> {
 		
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "HouseNumberRange [from=" + from + ", to=" + to + "]";
+	}
 	
 }

@@ -51,8 +51,10 @@ public class Street {
         		.append(numberScheme, other.numberScheme)
         		.isEquals();
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Street [name=" + name + ", streetType=" + streetType + ", numberScheme=" + numberScheme + "]";
+	}
 	
 }
