@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,11 @@ public class TextFileReader {
 		this.fileEncoding = fileEncoding;
 	}
 	
-	public List<String> readFile(String filePath) throws IOException, FileNotFoundException {
+	public List<String> readFile(InputStream fileStream) throws IOException, FileNotFoundException {
 		List<String> lines = new ArrayList<>();
 		
 		try (BufferedReader reader = new BufferedReader(
-				new InputStreamReader(new FileInputStream(filePath), fileEncoding))) {
+				new InputStreamReader(fileStream, fileEncoding))) {
 			
 			String line;
 			while ((line = reader.readLine()) != null) {
