@@ -1,12 +1,13 @@
-package nng.homework.io;
+package com.nng.homework.io;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import nng.homework.domain.IStreetPlate;
-import nng.homework.domain.StreetPlateBuilder;
+import com.nng.homework.domain.IStreetPlate;
+import com.nng.homework.domain.StreetPlateBuilder;
+import com.nng.homework.io.StreetPlateValidator;
 
 public class StreetPlateValidatorTest {
 

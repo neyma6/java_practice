@@ -1,13 +1,13 @@
-package nng.homework;
+package com.nng.homework;
 
 import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import nng.homework.domain.IStreetPlate;
-import nng.homework.io.StreetPlateParser;
-import nng.homework.io.TextFileReader;
+import com.nng.homework.domain.IStreetPlate;
+import com.nng.homework.io.StreetPlateParser;
+import com.nng.homework.io.TextFileReader;
 
 public class App {
 	

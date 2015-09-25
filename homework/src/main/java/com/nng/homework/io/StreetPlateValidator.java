@@ -1,8 +1,8 @@
-package nng.homework.io;
+package com.nng.homework.io;
 
-import nng.homework.domain.HouseNumberRange;
-import nng.homework.domain.IStreetPlate;
-import nng.homework.domain.Street;
+import com.nng.homework.domain.HouseNumberRange;
+import com.nng.homework.domain.IStreetPlate;
+import com.nng.homework.domain.Street;
 
 public class StreetPlateValidator {
 

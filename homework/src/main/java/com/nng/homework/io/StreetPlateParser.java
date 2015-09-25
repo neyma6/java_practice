@@ -1,12 +1,12 @@
-package nng.homework.io;
+package com.nng.homework.io;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import nng.homework.domain.IStreetPlate;
-import nng.homework.domain.StreetPlateBuilder;
+import com.nng.homework.domain.IStreetPlate;
+import com.nng.homework.domain.StreetPlateBuilder;
 
 public class StreetPlateParser {
 

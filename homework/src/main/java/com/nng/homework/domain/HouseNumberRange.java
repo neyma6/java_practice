@@ -1,4 +1,4 @@
-package nng.homework.domain;
+package com.nng.homework.domain;
 
 public class HouseNumberRange implements Comparable<HouseNumberRange> {
 

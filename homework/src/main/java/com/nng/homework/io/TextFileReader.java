@@ -1,4 +1,4 @@
-package nng.homework.io;
+package com.nng.homework.io;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

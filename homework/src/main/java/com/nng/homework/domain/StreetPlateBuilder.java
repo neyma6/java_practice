@@ -1,7 +1,6 @@
-package nng.homework.domain;
+package com.nng.homework.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StreetPlateBuilder {

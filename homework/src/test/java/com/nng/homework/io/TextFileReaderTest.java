@@ -1,4 +1,4 @@
-package nng.homework.io;
+package com.nng.homework.io;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.nng.homework.io.TextFileReader;
 
 public class TextFileReaderTest {
 
