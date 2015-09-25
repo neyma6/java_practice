@@ -19,14 +19,16 @@ public class StreetPlateParser {
 	public static List<IStreetPlate> parse(List<String> data) {
 		List<IStreetPlate> streetPlates = new ArrayList<>();
 		
-		for (String singleData : data) {
-			String[] separatedData = singleData.replaceAll(DELIMITER, EMPTY_STRING).split(SEPARATOR);
-
-			List<IStreetPlate> rawStreetPlates = createStreetPlates(separatedData);
-			
-			for (IStreetPlate sp : rawStreetPlates) {
-				if (StreetPlateValidator.validate(sp))
-					streetPlates.add(sp);
+		if (data != null) {
+			for (String singleData : data) {
+				String[] separatedData = singleData.replaceAll(DELIMITER, EMPTY_STRING).split(SEPARATOR);
+	
+				List<IStreetPlate> rawStreetPlates = createStreetPlates(separatedData);
+				
+				for (IStreetPlate sp : rawStreetPlates) {
+					if (StreetPlateValidator.validate(sp))
+						streetPlates.add(sp);
+				}
 			}
 		}
 		
