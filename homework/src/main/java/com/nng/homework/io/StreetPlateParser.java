@@ -16,7 +16,7 @@ public class StreetPlateParser {
 	private static final String SEPARATOR = ",";
 	private static final String EMPTY_STRING = "";
 	
-	public static List<IStreetPlate> parse(List<String> data) {
+	public List<IStreetPlate> parse(List<String> data) {
 		List<IStreetPlate> streetPlates = new ArrayList<>();
 		
 		if (data != null) {
@@ -35,7 +35,7 @@ public class StreetPlateParser {
 		return streetPlates;
 	}
 	
-	private static List<IStreetPlate> createStreetPlates(String[] data) {
+	private List<IStreetPlate> createStreetPlates(String[] data) {
 		
 		List<IStreetPlate> streetPlate;
 		try {

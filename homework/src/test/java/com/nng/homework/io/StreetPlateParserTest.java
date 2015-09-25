@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.nng.homework.domain.IStreetPlate;
@@ -20,9 +21,16 @@ public class StreetPlateParserTest {
 	
 	public static final String[] INVALID_INPUT_FEW_DATA = {"513563,390896,390897,\"4\",3,\"\",\"\",329,\"F\",\"NNNNNNN\""};
 	
+	private StreetPlateParser parser;
+	
+	@Before
+	public void setup() {
+		parser = new StreetPlateParser();
+	}
+	
 	@Test
 	public void whenTheInputIsValidThenTheInputIsParsedSuccessfully() {
-		List<IStreetPlate> sps = StreetPlateParser.parse(Arrays.asList(VALID_INPUT));
+		List<IStreetPlate> sps = parser.parse(Arrays.asList(VALID_INPUT));
 		
 		assertFalse(sps.isEmpty());
 		assertTrue(sps.size() == 4);
@@ -30,24 +38,24 @@ public class StreetPlateParserTest {
 	
 	@Test 
 	public void whenTheInputIsEmptyThenAnEmptyArrayShouldReturn() {
-		List<IStreetPlate> sps = StreetPlateParser.parse(Arrays.asList(EMPTY_INPUT));
+		List<IStreetPlate> sps = parser.parse(Arrays.asList(EMPTY_INPUT));
 		assertTrue(sps.isEmpty());
 	}
 	
 	@Test 
 	public void whenTheInputIsNullThenAnEmptyArrayShouldReturn() {
-		List<IStreetPlate> sps = StreetPlateParser.parse(null);
+		List<IStreetPlate> sps = parser.parse(null);
 		assertTrue(sps.isEmpty());
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void whenTheInputContainsStringInsteadOfIntThenAndExceptionShouldBeThrown() {
-		StreetPlateParser.parse(Arrays.asList(INVALID_INPUT_WRONG_NUMBER));
+		parser.parse(Arrays.asList(INVALID_INPUT_WRONG_NUMBER));
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void whenTheInputContainsTooFewDataThenAndExceptionShouldBeThrown() {
-		StreetPlateParser.parse(Arrays.asList(INVALID_INPUT_FEW_DATA));
+		parser.parse(Arrays.asList(INVALID_INPUT_FEW_DATA));
 	}
 	
 }

@@ -23,7 +23,7 @@ public class App {
     	
     	try {
     		TextFileReader reader = new TextFileReader(ENCODING);
-    		List<IStreetPlate> streetPlates = StreetPlateParser.parse(reader.readFile(fileStream));
+    		List<IStreetPlate> streetPlates = new StreetPlateParser().parse(reader.readFile(fileStream));
     		
     		for (IStreetPlate sp : streetPlates) {
     			System.out.println(sp);
