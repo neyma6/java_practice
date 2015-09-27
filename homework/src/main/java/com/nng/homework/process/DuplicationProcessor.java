@@ -34,12 +34,12 @@ public class DuplicationProcessor {
 			HouseNumberRange range = sp.getRange();
 			
 			SortedSet<HouseNumberRange> storedPlates = getOrCreateSortedPlates(sortedStreetPlates, street);
-			if (storedPlates.contains(range)) {
-				SortedSet<HouseNumberRange> duplicatedPlates = getOrCreateSortedPlates(duplicatedStreetPlates, street);
-				duplicatedPlates.add(range);
-			} else {
+			//if (storedPlates.contains(range)) {
+				//SortedSet<HouseNumberRange> duplicatedPlates = getOrCreateSortedPlates(duplicatedStreetPlates, street);
+				//duplicatedPlates.add(range);
+			//} else {
 				storedPlates.add(range);
-			}
+			//}
 			
 		}
 	}
@@ -58,6 +58,7 @@ public class DuplicationProcessor {
 				
 				if (isCrossSection(previousRange, range)) {
 					HouseNumberRange crossSection = getCrossSection(previousRange, range);
+					SortedSet<HouseNumberRange> duplicatedPlates = getOrCreateSortedPlates(duplicatedStreetPlates, street);
 				}
 				
 				previousRange = range;
@@ -87,6 +88,14 @@ public class DuplicationProcessor {
 			SortedSet<HouseNumberRange> storedPlates = new TreeSet<>();
 			map.put(street, storedPlates);
 			return storedPlates;
+		}
+	}
+	
+	private void addRangeToDuplicatedRanges(HouseNumberRange range, SortedSet<HouseNumberRange> duplicatedPlates) {
+		if (duplicatedPlates.isEmpty()) {
+			duplicatedPlates.add(range);
+		} else {
+			
 		}
 	}
 }
