@@ -3,11 +3,11 @@ package com.nng.homework.io;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.nng.homework.domain.IStreetPlate;
 import com.nng.homework.domain.StreetPlateBuilder;
-import com.nng.homework.io.StreetPlateValidator;
 
 public class StreetPlateValidatorTest {
 
@@ -17,6 +17,13 @@ public class StreetPlateValidatorTest {
 	private static final String EMPTY_STRING = "";
 	private static final int FROM = 8;
 	private static final int TO = 10;
+	
+	private StreetPlateValidator validator;
+	
+	@Before
+	public void setup() {
+		validator = new StreetPlateValidator();
+	}
 	
 	@Test
 	public void whenTheStreetPlateHasAllParametersThenTheStreetPlateIsValid() {
@@ -28,12 +35,12 @@ public class StreetPlateValidatorTest {
 				.withLeftSideTo(TO)
 				.build().get(0);
 		
-		assertTrue(StreetPlateValidator.validate(sp));
+		assertTrue(validator.validate(sp));
 	}
 	
 	@Test
 	public void whenTheInputIsNullThenValidationFails() {
-		assertFalse(StreetPlateValidator.validate(null));
+		assertFalse(validator.validate(null));
 	}
 	
 	@Test
@@ -46,7 +53,7 @@ public class StreetPlateValidatorTest {
 				.withLeftSideTo(TO)
 				.build().get(0);
 		
-		assertFalse(StreetPlateValidator.validate(sp));
+		assertFalse(validator.validate(sp));
 	}
 	
 	
@@ -56,7 +63,7 @@ public class StreetPlateValidatorTest {
 				.withName(NAME)
 				.build().get(0);
 		
-		assertFalse(StreetPlateValidator.validate(sp));
+		assertFalse(validator.validate(sp));
 	}
 	
 	@Test
@@ -67,7 +74,7 @@ public class StreetPlateValidatorTest {
 				.withLeftSideScheme(SCHEME)
 				.build().get(0);
 		
-		assertFalse(StreetPlateValidator.validate(sp));
+		assertFalse(validator.validate(sp));
 	}
 	
 	@Test
@@ -80,7 +87,7 @@ public class StreetPlateValidatorTest {
 				.withLeftSideTo(FROM)
 				.build().get(0);
 		
-		assertFalse(StreetPlateValidator.validate(sp));
+		assertFalse(validator.validate(sp));
 	}
 	
 }

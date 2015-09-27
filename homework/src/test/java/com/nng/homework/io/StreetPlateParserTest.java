@@ -1,8 +1,8 @@
 package com.nng.homework.io;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,14 @@ public class StreetPlateParserTest {
 	
 	@Before
 	public void setup() {
-		parser = new StreetPlateParser();
+		parser = new StreetPlateParser(new IValidator<IStreetPlate>() {
+
+			@Override
+			public boolean validate(IStreetPlate obj) {
+				return true;
+			}
+			
+		});
 	}
 	
 	@Test

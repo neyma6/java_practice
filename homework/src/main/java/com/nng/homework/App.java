@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.nng.homework.domain.IStreetPlate;
 import com.nng.homework.io.StreetPlateParser;
+import com.nng.homework.io.StreetPlateValidator;
 import com.nng.homework.io.TextFileReader;
 
 public class App {
@@ -23,7 +24,8 @@ public class App {
     	
     	try {
     		TextFileReader reader = new TextFileReader(ENCODING);
-    		List<IStreetPlate> streetPlates = new StreetPlateParser().parse(reader.readFile(fileStream));
+    		List<IStreetPlate> streetPlates = new StreetPlateParser(new StreetPlateValidator())
+    				.parse(reader.readFile(fileStream));
     		
     		for (IStreetPlate sp : streetPlates) {
     			System.out.println(sp);

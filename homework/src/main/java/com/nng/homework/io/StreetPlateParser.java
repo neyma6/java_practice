@@ -16,6 +16,12 @@ public class StreetPlateParser {
 	private static final String SEPARATOR = ",";
 	private static final String EMPTY_STRING = "";
 	
+	private IValidator<IStreetPlate> validator;
+	
+	public StreetPlateParser(IValidator<IStreetPlate> validator) {
+		this.validator = validator;
+	}
+
 	public List<IStreetPlate> parse(List<String> data) {
 		List<IStreetPlate> streetPlates = new ArrayList<>();
 		
@@ -26,7 +32,7 @@ public class StreetPlateParser {
 				List<IStreetPlate> rawStreetPlates = createStreetPlates(separatedData);
 				
 				for (IStreetPlate sp : rawStreetPlates) {
-					if (StreetPlateValidator.validate(sp))
+					if (validator.validate(sp))
 						streetPlates.add(sp);
 				}
 			}

@@ -4,12 +4,12 @@ import com.nng.homework.domain.HouseNumberRange;
 import com.nng.homework.domain.IStreetPlate;
 import com.nng.homework.domain.Street;
 
-public class StreetPlateValidator {
+public class StreetPlateValidator implements IValidator<IStreetPlate> {
 
 	private static final String EMPTY_STRING = "";
 	private static final int ZERO = 0;
 	
-	public static boolean validate(IStreetPlate streetPlate) {
+	public boolean validate(IStreetPlate streetPlate) {
 		
 		if (streetPlate == null || streetPlate.getStreet() == null || streetPlate.getRange() == null)
 			return false;
