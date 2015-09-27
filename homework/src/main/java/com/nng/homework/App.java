@@ -9,6 +9,7 @@ import com.nng.homework.domain.IStreetPlate;
 import com.nng.homework.io.StreetPlateParser;
 import com.nng.homework.io.StreetPlateValidator;
 import com.nng.homework.io.TextFileReader;
+import com.nng.homework.process.DuplicationProcessor;
 
 public class App {
 	
@@ -27,13 +28,12 @@ public class App {
     		List<IStreetPlate> streetPlates = new StreetPlateParser(new StreetPlateValidator())
     				.parse(reader.readFile(fileStream));
     		
-    		for (IStreetPlate sp : streetPlates) {
-    			System.out.println(sp);
-    		}
-    		
-    		System.out.println(streetPlates.size());
+
+    		List<IStreetPlate> duplicatedStreetPlates = new DuplicationProcessor().process(streetPlates);
     	} catch (Exception ex) {
     		LOGGER.log(Level.SEVERE, "There was an exception during running!", ex);
     	}
+    	
+    	System.out.println("Success");
     }
 }
