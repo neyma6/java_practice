@@ -1,6 +1,7 @@
 package com.nng.homework.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StreetPlateBuilder {
@@ -10,8 +11,8 @@ public class StreetPlateBuilder {
 	private String name = EMPTY_STRING;
 	private String type = EMPTY_STRING;
 	
-	private final Side left = new Side();
-	private final Side right = new Side();
+	private Side left;
+	private Side right;
 	
 	private StreetPlateBuilder() {
 	}
@@ -31,31 +32,37 @@ public class StreetPlateBuilder {
 	}
 	
 	public StreetPlateBuilder withLeftSideScheme(String scheme) {
+		createLeftSide();
 		this.left.setScheme(scheme);
 		return this;
 	}
 	
 	public StreetPlateBuilder withRightSideScheme(String scheme) {
+		createRightSide();
 		this.right.setScheme(scheme);
 		return this;
 	}
 	
 	public StreetPlateBuilder withLeftSideFrom(int from) {
+		createLeftSide();
 		this.left.setFrom(from);
 		return this;
 	}
 	
 	public StreetPlateBuilder withRightSideFrom(int from) {
+		createRightSide();
 		this.right.setFrom(from);
 		return this;
 	}
 	
 	public StreetPlateBuilder withLeftSideTo(int to) {
+		createLeftSide();
 		this.left.setTo(to);
 		return this;
 	}
 	
 	public StreetPlateBuilder withRightSideTo(int to) {
+		createRightSide();
 		this.right.setTo(to);
 		return this;
 	}
@@ -70,6 +77,10 @@ public class StreetPlateBuilder {
 	}
 	
 	private List<IStreetPlate> processStreetSide(Side side) {
+		if (side == null) {
+			return Collections.emptyList();
+		}
+		
 		List<IStreetPlate> streetPlates = new ArrayList<>();
 		String scheme = side.getScheme();
 		
@@ -104,6 +115,16 @@ public class StreetPlateBuilder {
 		Street street = new Street(name, type, scheme);
 		HouseNumberRange range = new HouseNumberRange(from, to);
 		return new StreetPlate(street, range);
+	}
+	
+	private void createLeftSide() {
+		if (left == null)
+			left = new Side();
+	}
+	
+	private void createRightSide() {
+		if (right == null)
+			right = new Side();
 	}
 	
 	private class StreetPlate implements IStreetPlate {

@@ -1,21 +1,24 @@
 package com.nng.homework;
 
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.nng.homework.domain.IStreetPlate;
+import com.nng.homework.io.ResultWriter;
 import com.nng.homework.io.StreetPlateParser;
 import com.nng.homework.io.StreetPlateValidator;
 import com.nng.homework.io.TextFileReader;
 import com.nng.homework.process.DuplicationProcessor;
+import com.nng.homework.util.StreetPlateComparator;
 
 public class App {
 	
 	private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 	
-	private static String RESOURCE_NAME = "network.mid";
+	private static String RESOURCE_NAME = "network_2.mid";
 	private static String ENCODING = "Cp1252";
 	
     public static void main( String[] args ) {
@@ -30,10 +33,12 @@ public class App {
     		
 
     		List<IStreetPlate> duplicatedStreetPlates = new DuplicationProcessor().process(streetPlates);
+    		
+    		Collections.sort(duplicatedStreetPlates, new StreetPlateComparator());
+    		
+    		new ResultWriter().write(duplicatedStreetPlates);
     	} catch (Exception ex) {
     		LOGGER.log(Level.SEVERE, "There was an exception during running!", ex);
     	}
-    	
-    	System.out.println("Success");
     }
 }

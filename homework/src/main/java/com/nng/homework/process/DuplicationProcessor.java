@@ -1,5 +1,6 @@
 package com.nng.homework.process;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.TreeSet;
 import com.nng.homework.domain.HouseNumberRange;
 import com.nng.homework.domain.IStreetPlate;
 import com.nng.homework.domain.Street;
+import com.nng.homework.domain.StreetPlateBuilder;
 
 public class DuplicationProcessor {
 
@@ -19,10 +21,8 @@ public class DuplicationProcessor {
 		
 		sortStreetPlates(streetPlates, sortedStreetPlates, duplicatedStreetPlates);
 		determineDuplicates(sortedStreetPlates, duplicatedStreetPlates);
-		
-		System.out.println(duplicatedStreetPlates);
-		
-		return null;
+
+		return convertStreetMapToStreetPlates(duplicatedStreetPlates);
 	}
 	
 	private void sortStreetPlates(List<IStreetPlate> streetPlates, 
@@ -34,12 +34,12 @@ public class DuplicationProcessor {
 			HouseNumberRange range = sp.getRange();
 			
 			SortedSet<HouseNumberRange> storedPlates = getOrCreateSortedPlates(sortedStreetPlates, street);
-			//if (storedPlates.contains(range)) {
-				//SortedSet<HouseNumberRange> duplicatedPlates = getOrCreateSortedPlates(duplicatedStreetPlates, street);
-				//duplicatedPlates.add(range);
-			//} else {
+			if (storedPlates.contains(range)) {
+				SortedSet<HouseNumberRange> duplicatedPlates = getOrCreateSortedPlates(duplicatedStreetPlates, street);
+				duplicatedPlates.add(range);
+			} else {
 				storedPlates.add(range);
-			//}
+			}
 			
 		}
 	}
@@ -59,6 +59,7 @@ public class DuplicationProcessor {
 				if (isCrossSection(previousRange, range)) {
 					HouseNumberRange crossSection = getCrossSection(previousRange, range);
 					SortedSet<HouseNumberRange> duplicatedPlates = getOrCreateSortedPlates(duplicatedStreetPlates, street);
+					addRangeToDuplicatedRanges(crossSection, duplicatedPlates);
 				}
 				
 				previousRange = range;
@@ -95,7 +96,32 @@ public class DuplicationProcessor {
 		if (duplicatedPlates.isEmpty()) {
 			duplicatedPlates.add(range);
 		} else {
-			
+			HouseNumberRange last = duplicatedPlates.last();
+			if (isCrossSection(last, range)) {
+				int to = last.getTo() < range.getTo() ? range.getTo() : last.getTo();
+				last.setTo(to);
+			} else {
+				duplicatedPlates.add(range);
+			}
 		}
+	}
+	
+	private List<IStreetPlate> convertStreetMapToStreetPlates(Map<Street, SortedSet<HouseNumberRange>> map) {
+		List<IStreetPlate> streetPlates = new ArrayList<>();
+		
+		for (Street street : map.keySet()) {
+			SortedSet<HouseNumberRange> rangeSet = map.get(street);
+			for (HouseNumberRange range : rangeSet) {
+				streetPlates.addAll(StreetPlateBuilder.createBuilder()
+						.withName(street.getName())
+						.withType(street.getStreetType())
+						.withLeftSideScheme(street.getNumberScheme().getSchemeType())
+						.withLeftSideFrom(range.getFrom())
+						.withLeftSideTo(range.getTo())
+						.build());
+			}
+		}
+		
+		return streetPlates;
 	}
 }
