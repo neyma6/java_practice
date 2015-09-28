@@ -56,16 +56,6 @@ public class StreetPlateValidatorTest {
 		assertFalse(validator.validate(sp));
 	}
 	
-	
-	/*@Test
-	public void whenOnlyTheNameIsGivenThenValidationFails() {
-		IStreetPlate sp = StreetPlateBuilder.createBuilder()
-				.withName(NAME)
-				.build().get(0);
-		
-		assertFalse(validator.validate(sp));
-	}*/
-	
 	@Test
 	public void whenTheRangeIsNotGivenThenValidationFails() {
 		IStreetPlate sp = StreetPlateBuilder.createBuilder()

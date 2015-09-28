@@ -102,13 +102,7 @@ public class StreetPlateBuilder {
 	}
 	
 	private HouseNumberScheme determineScheme(int from) {
-		HouseNumberScheme scheme;
-		if (from % 2 == 0) {
-			scheme = HouseNumberScheme.EVEN;
-		} else {
-			scheme = HouseNumberScheme.ODD;
-		}
-		return scheme;
+		return from % 2 == 0 ? HouseNumberScheme.EVEN : HouseNumberScheme.ODD;
 	}
 	
 	private IStreetPlate createStreetPlate(HouseNumberScheme scheme, int from, int to) {
