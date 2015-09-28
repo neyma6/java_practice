@@ -18,7 +18,7 @@ public class App {
 	
 	private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 	
-	private static String RESOURCE_NAME = "network_2.mid";
+	private static String RESOURCE_NAME = "network.mid";
 	private static String ENCODING = "Cp1252";
 	
     public static void main( String[] args ) {

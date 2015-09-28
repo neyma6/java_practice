@@ -88,14 +88,11 @@ public class StreetPlateBuilder {
 			int from = side.getFrom();
 			int to = side.getTo();
 			
-			HouseNumberScheme houseScheme = determineScheme(from);
-			
-			streetPlates.add(createStreetPlate(houseScheme, from, to - 1));
-			streetPlates.add(createStreetPlate(houseScheme.oppositeSideScheme(), from + 1, to));
+			streetPlates.add(createStreetPlate(from, to - 1));
+			streetPlates.add(createStreetPlate(from + 1, to));
 			
 		} else {
-			streetPlates.add(createStreetPlate(HouseNumberScheme.getProperScheme(scheme), 
-					side.getFrom(), side.getTo()));
+			streetPlates.add(createStreetPlate(side.getFrom(), side.getTo()));
 		}
 		
 		return streetPlates;
@@ -105,8 +102,8 @@ public class StreetPlateBuilder {
 		return from % 2 == 0 ? HouseNumberScheme.EVEN : HouseNumberScheme.ODD;
 	}
 	
-	private IStreetPlate createStreetPlate(HouseNumberScheme scheme, int from, int to) {
-		Street street = new Street(name, type, scheme);
+	private IStreetPlate createStreetPlate(int from, int to) {
+		Street street = new Street(name, type, determineScheme(from));
 		HouseNumberRange range = new HouseNumberRange(from, to);
 		return new StreetPlate(street, range);
 	}
