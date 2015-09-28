@@ -15,6 +15,7 @@ public enum HouseNumberScheme {
 		return schemeType;
 	}
 	
+	//remove this
 	public HouseNumberScheme oppositeSideScheme() {
 		switch(this) {
 			case ODD: return EVEN;
@@ -23,6 +24,7 @@ public enum HouseNumberScheme {
 		}
 	}
 	
+	//remove this
 	public static HouseNumberScheme getProperScheme(String schemeValue) {
 		switch(schemeValue) {
 			case "O": return ODD; 
