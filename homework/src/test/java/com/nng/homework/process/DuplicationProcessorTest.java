@@ -42,6 +42,42 @@ public class DuplicationProcessorTest {
 		thenTheResultsSizeIs(0);
 	}
 	
+	@Test
+	public void whenTheRangesAreTheSameThen1StreetPlateShouldReturn() {
+		givenStreetPlateToInput(NAME_1, TYPE_1, EVEN, 2, 10);
+		givenStreetPlateToInput(NAME_1, TYPE_1, EVEN, 2, 10);
+	}
+	
+	@Test
+	public void whenThereIsACrossSectionThenOneStreetPlateShouldReturn() {
+		
+	}
+	
+	@Test
+	public void whenStreetNamesAreNotTheSameButRangesThenAnEmptyListShouldReturn() {
+		
+	}
+	
+	@Test
+	public void whenStreetTypesAreNotTheSameButRangesThenAnEmptyListShouldReturn() {
+		
+	}
+	
+	@Test // 2 street names
+	public void whenFourStreetPlatesAreGivenAndThereAreTwoCrossSectionThenTwoStreetPlateShouldReturn() {
+		
+	}
+	
+	@Test // 2 street names
+	public void whenFourStreetPlatesAreGivenAndTheRangesAreTheSameThenTwoStreetPlateShouldReturn() {
+		
+	}
+	
+	@Test // 1 street name
+	public void whenThreeStreetPlatesAreGivenAndTheRangesAreTheSameThenOneStreetPlateShouldReturn() {
+		
+	}
+	
 	private void givenStreetPlateToInput(String name, String type, HouseNumberScheme scheme, int from, int to) {
 		input.add(new TestStreetPlate(new Street(name, type, scheme), new HouseNumberRange(from, to)));
 	}
