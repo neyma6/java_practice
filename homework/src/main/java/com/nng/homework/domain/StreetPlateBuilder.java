@@ -7,6 +7,7 @@ import java.util.List;
 public class StreetPlateBuilder {
 
 	private static final String EMPTY_STRING = "";
+	private static final String MIXED = "M";
 	
 	private String name = EMPTY_STRING;
 	private String type = EMPTY_STRING;
@@ -84,12 +85,9 @@ public class StreetPlateBuilder {
 		List<IStreetPlate> streetPlates = new ArrayList<>();
 		String scheme = side.getScheme();
 		
-		if (scheme.equals("M")) {
-			int from = side.getFrom();
-			int to = side.getTo();
-			
-			streetPlates.add(createStreetPlate(from, to - 1));
-			streetPlates.add(createStreetPlate(from + 1, to));
+		if (scheme.equals(MIXED)) {
+			streetPlates.add(createStreetPlate(side.getFrom(), side.getTo() - 1));
+			streetPlates.add(createStreetPlate(side.getFrom() + 1, side.getTo()));
 			
 		} else {
 			streetPlates.add(createStreetPlate(side.getFrom(), side.getTo()));
