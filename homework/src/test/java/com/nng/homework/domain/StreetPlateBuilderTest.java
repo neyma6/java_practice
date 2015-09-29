@@ -11,6 +11,9 @@ public class StreetPlateBuilderTest {
 
 	private static final String NAME = "Kinizsi";
 	private static final String TYPE = "utca";
+	private static final String EVEN = "E";
+	private static final String ODD = "O";
+	private static final String MIXED = "M";
 	private static final int EVEN_FROM = 2;
 	private static final int EVEN_TO = 8;
 	private static final int ODD_FROM = 3;
@@ -28,8 +31,8 @@ public class StreetPlateBuilderTest {
 	public void whenEveryParameterIsGivenThen2StreetPlateShouldReturn() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithLeftSideParams("E", EVEN_FROM, EVEN_TO);
-		givenBuilderWithRightSideParams("O", ODD_FROM, ODD_TO);
+		givenBuilderWithLeftSideParams(EVEN, EVEN_FROM, EVEN_TO);
+		givenBuilderWithRightSideParams(ODD, ODD_FROM, ODD_TO);
 		
 		whenBuilderInvokes();
 		
@@ -49,7 +52,7 @@ public class StreetPlateBuilderTest {
 	public void whenJustLeftParamsGivenThen1StreetPlateShouldReturns() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithLeftSideParams("E", EVEN_FROM, EVEN_TO);
+		givenBuilderWithLeftSideParams(EVEN, EVEN_FROM, EVEN_TO);
 		
 		whenBuilderInvokes();
 		
@@ -62,7 +65,7 @@ public class StreetPlateBuilderTest {
 	public void whenJustRightParamsGivenThen1StreetPlateShouldReturns() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithRightSideParams("O", ODD_FROM, ODD_TO);
+		givenBuilderWithRightSideParams(ODD, ODD_FROM, ODD_TO);
 		
 		whenBuilderInvokes();
 		
@@ -85,8 +88,8 @@ public class StreetPlateBuilderTest {
 	public void whenLeftSchemeIsMixedAndTheRightIsGivenThen3StreetPlateShouldReturn() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithLeftSideParams("M", EVEN_FROM, ODD_TO);
-		givenBuilderWithRightSideParams("O", ODD_FROM, ODD_TO);
+		givenBuilderWithLeftSideParams(MIXED, EVEN_FROM, ODD_TO);
+		givenBuilderWithRightSideParams(ODD, ODD_FROM, ODD_TO);
 		
 		whenBuilderInvokes();
 		
@@ -101,8 +104,8 @@ public class StreetPlateBuilderTest {
 	public void whenRightSchemeIsMixedAndTheLeftIsGivenThen3StreetPlateShouldReturn() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithLeftSideParams("E", EVEN_FROM, EVEN_TO);
-		givenBuilderWithRightSideParams("M", ODD_FROM, EVEN_TO);
+		givenBuilderWithLeftSideParams(EVEN, EVEN_FROM, EVEN_TO);
+		givenBuilderWithRightSideParams(MIXED, ODD_FROM, EVEN_TO);
 		
 		whenBuilderInvokes();
 		
@@ -117,7 +120,7 @@ public class StreetPlateBuilderTest {
 	public void whenLeftSchemeIsMixedAndTheRightIsSideNotGivenThen2StreetPlateShouldReturn() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithLeftSideParams("M", EVEN_FROM, ODD_TO);
+		givenBuilderWithLeftSideParams(MIXED, EVEN_FROM, ODD_TO);
 		
 		whenBuilderInvokes();
 		
@@ -131,13 +134,26 @@ public class StreetPlateBuilderTest {
 	public void whenRightSchemeIsMixedAndTheLeftIsSideNotGivenThen2StreetPlateShouldReturn() {
 		givenBuilderWithName(NAME);
 		givenBuilderWithType(TYPE);
-		givenBuilderWithRightSideParams("M", ODD_FROM, EVEN_TO);
+		givenBuilderWithRightSideParams(MIXED, ODD_FROM, EVEN_TO);
 		
 		whenBuilderInvokes();
 		
 		thenTheResultsSizeIs(2);
 		Object[][] verificationData = {{NAME, TYPE, HouseNumberScheme.ODD, ODD_FROM, EVEN_TO - 1},
 										{NAME, TYPE, HouseNumberScheme.EVEN, ODD_FROM + 1, EVEN_TO}};
+		verifyResult(verificationData);
+	}
+	
+	@Test
+	public void whenTheRangeValuesAreChangedThenTheBuilderShouldChangeThem() {
+		givenBuilderWithName(NAME);
+		givenBuilderWithType(TYPE);
+		givenBuilderWithLeftSideParams(EVEN, EVEN_TO, EVEN_FROM);
+		
+		whenBuilderInvokes();
+		
+		thenTheResultsSizeIs(1);
+		Object[][] verificationData = {{NAME, TYPE, HouseNumberScheme.EVEN, EVEN_FROM, EVEN_TO}};
 		verifyResult(verificationData);
 	}
 	

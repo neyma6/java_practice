@@ -103,8 +103,11 @@ public class StreetPlateBuilder {
 	}
 	
 	private IStreetPlate createStreetPlate(int from, int to) {
-		Street street = new Street(name, type, determineScheme(from));
-		HouseNumberRange range = new HouseNumberRange(from, to);
+		int min = Math.min(from, to);
+		int max = Math.max(from, to);
+		
+		Street street = new Street(name, type, determineScheme(min));
+		HouseNumberRange range = new HouseNumberRange(min, max);
 		return new StreetPlate(street, range);
 	}
 	

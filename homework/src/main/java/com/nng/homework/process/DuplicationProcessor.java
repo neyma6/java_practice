@@ -52,6 +52,7 @@ public class DuplicationProcessor {
 			HouseNumberRange previousRange = sortedRanges.first();
 			
 			for (HouseNumberRange range : sortedRanges) {
+				
 				if (range == previousRange) {
 					continue;
 				}
